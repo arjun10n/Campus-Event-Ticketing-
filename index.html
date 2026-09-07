@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Venue — Campus Event Ticketing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <div class="logo">Venue</div>
+    <nav class="topnav">
+      <a href="#events">Events</a>
+      <a href="#how">How it works</a>
+      <a href="#admin">For organizers</a>
+    </nav>
+    <button class="btn btn-ghost" id="signInBtn">Sign in</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <p class="hero-kicker">Campus events, one queue-free tap away</p>
+        <h1>Stop refreshing<br>the group chat<br>for event links.</h1>
+        <p class="hero-sub">Venue is where your college finds, registers for, and gets into events — fests, workshops, hackathons, guest talks — without a single paper QR code screenshot.</p>
+        <div class="hero-actions">
+          <a href="#events" class="btn btn-primary">Browse events</a>
+          <a href="#admin" class="btn btn-outline">Create an event</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong id="statEvents">0</strong><span>live events</span></div>
+          <div><strong id="statSeats">0</strong><span>seats left today</span></div>
+          <div><strong>0 min</strong><span>check-in per student</span></div>
+        </div>
+      </div>
+      <div class="hero-ticket" aria-hidden="true">
+        <div class="ticket-card">
+          <div class="ticket-top">
+            <span class="ticket-tag">TECH FEST</span>
+            <span class="ticket-status">3 seats left</span>
+          </div>
+          <h3>CodeStorm 2026</h3>
+          <p class="ticket-meta">Sat, 6 Sep · 10:00 AM · Auditorium B</p>
+          <div class="ticket-stub">
+            <span>ADMIT ONE</span>
+            <span class="stub-code">#VEN-2291</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section id="events" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What's on this week</h2>
+        <div class="filter-row" id="filterRow">
+          <button class="chip is-active" data-filter="all">All</button>
+          <button class="chip" data-filter="fest">Fests</button>
+          <button class="chip" data-filter="workshop">Workshops</button>
+          <button class="chip" data-filter="talk">Talks</button>
+          <button class="chip" data-filter="sports">Sports</button>
+        </div>
+      </div>
+
+      <div class="event-grid" id="eventGrid"><!-- injected by app.js --></div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="section section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>From browsing to badge in three steps</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Find your event</h3>
+          <p>Filter by category, date or venue. Every listing shows live seats left, so you know before you commit.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Register in one tap</h3>
+          <p>Your college ID logs you in. No forms, no separate account for every club running an event.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Walk in with your code</h3>
+          <p>A ticket lands in your account instantly. Organizers scan it at the door — headcount updates itself.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADMIN / ORGANIZER -->
+  <section id="admin" class="section admin-section">
+    <div class="wrap admin-inner">
+      <div class="admin-copy">
+        <h2>Built for the club running it, too</h2>
+        <p>Organizers get a dashboard to publish events, cap registrations, and watch headcount fill up in real time — no more counting hands at the door or reconciling a spreadsheet at midnight.</p>
+        <ul class="admin-list">
+          <li>Set seat limits and registration deadlines per event</li>
+          <li>See who's registered and who actually checked in</li>
+          <li>Close, reopen or duplicate an event in a click</li>
+        </ul>
+        <a href="#" class="btn btn-primary" id="openDashboardBtn">Open organizer dashboard</a>
+      </div>
+      <div class="admin-panel" aria-hidden="true">
+        <div class="panel-head">
+          <span>CodeStorm 2026 · headcount</span>
+          <span class="panel-live">● live</span>
+        </div>
+        <div class="panel-bar"><div class="panel-fill" style="width:76%"></div></div>
+        <div class="panel-row"><span>Registered</span><strong>152 / 200</strong></div>
+        <div class="panel-row"><span>Checked in</span><strong>0</strong></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="logo">Venue</div>
+    <p>A student project for CS3301 — Full-Stack Development.</p>
+  </div>
+</footer>
+
+<!-- REGISTRATION MODAL -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+    <p class="modal-kicker" id="modalKicker">EVENT</p>
+    <h3 id="modalTitle">Event name</h3>
+    <p class="modal-meta" id="modalMeta">Date · Venue</p>
+    <p class="modal-seats" id="modalSeats">Seats left</p>
+    <button class="btn btn-primary btn-block" id="modalConfirm">Confirm registration</button>
+    <div class="modal-success" id="modalSuccess" hidden>
+      <p class="success-badge">✓ You're in</p>
+      <p>Your ticket code: <strong id="successCode"></strong></p>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
